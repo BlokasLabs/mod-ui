@@ -1780,11 +1780,12 @@ JqueryClass('pedalboard', {
     },
 
     resetConnections: function () {
-        var self = $(this)
-        var connMgr = self.data('connectionManager')
-        connMgr.iterate(function (jack) {
-            self.pedalboard('disconnect', jack)
-        })
+        location.reload()
+        //var self = $(this)
+        //var connMgr = self.data('connectionManager')
+        //connMgr.iterate(function (jack) {
+        //    self.pedalboard('disconnect', jack)
+        //})
     },
 
     // Removes all pedalboard data
