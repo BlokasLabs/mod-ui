@@ -264,14 +264,8 @@ class Host(object):
         self.abort_progress_catcher = {}
         self.processing_pending_flag = False
         self.init_plugins_data()
-
-        if APP and os.getenv("MOD_LIVE_ISO") is not None:
-            self.jack_hwin_prefix  = "system:playback_"
-            self.jack_hwout_prefix = "system:capture_"
-        else:
-            self.jack_hwin_prefix  = "mod-monitor:in_"
-            self.jack_hwout_prefix = "mod-monitor:out_"
-
+        self.jack_hwin_prefix  = "system:playback_"
+        self.jack_hwout_prefix = "system:capture_"
         self.jack_slave_prefix = "mod-slave"
 
         # checked when saving pedal presets
