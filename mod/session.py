@@ -348,7 +348,7 @@ class Session(object):
     def reset(self, callback):
         logging.debug("SESSION RESET")
         self.host.send_notmodified("feature_enable processing 0")
-        #self.host.msg_callback("resetConnections") # TODO_GT ar reikia?
+        self.host.msg_callback("resetConnections")
 
         def host_callback(resp):
             self.host.send_notmodified("feature_enable processing 1")
