@@ -319,6 +319,8 @@ JqueryClass('patchstorageBox', {
             plugin.category = ['MIDI',]
         }
 
+        console.log(plugin)
+
         self.patchstorageBox('synchronizePluginData', plugin)
         return plugin
 
@@ -388,9 +390,9 @@ JqueryClass('patchstorageBox', {
                 var lplugins = {}
                 for (var i in plugins) {
                     var plugin = plugins[i]
-                    if (plugin && plugin.patchstorage) {
-                        plugin.psid = plugin.patchstorage.id
-                        plugin.ps_local_version = plugin.patchstorage.version
+                    if (plugin && plugin.patchstorage && plugin.patchstorage.id) {
+                        plugin.psid = String(plugin.patchstorage.id)
+                        plugin.ps_local_version = (plugin.patchstorage.revision) ? plugin.patchstorage.revision : "0.0"
                     }
                     lplugins[plugin.uri] = plugin
                 }
@@ -429,9 +431,9 @@ JqueryClass('patchstorageBox', {
                 version: VERSION
             },
             success: function (data) {
-                if ('patchstorage' in data) {
-                    data.psid = data.patchstorage.id
-                    data.ps_local_version = data.patchstorage.version
+                if (data.patchstorage && data.patchstorage.id) {
+                    data.psid = String(data.patchstorage.id)
+                    data.ps_local_version = (data.patchstorage.revision) ? data.patchstorage.revision : "0.0"
                 }
                 store.local = $.extend(true, {}, data)
                 self.data('pluginLocalChecked', true)

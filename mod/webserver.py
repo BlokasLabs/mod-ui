@@ -202,7 +202,7 @@ def install_package(filename, options, callback):
 
         if psid is not None:
             psversion = options.get("psversion", "0.0")
-            config = "ID={}\nVERSION={}\n".format(psid, psversion)
+            config = {"id": int(psid), "revision": str(psversion)}
 
             try:
                 with tarfile.open(filename) as f:
@@ -211,9 +211,10 @@ def install_package(filename, options, callback):
                 logging.warning(f'tar file read error: {str(e)}')
 
             for name in bundlenames:
-                if not any(s in name for s in ["/", "\\"]) and os.path.isdir(os.path.join(DOWNLOAD_TMP_DIR, name)):            
-                    with open(os.path.join(DOWNLOAD_TMP_DIR, name, "patchstorage"), 'w') as f:
-                        f.write(config)
+                if not any(s in name for s in ["/", "\\"]) and os.path.isdir(os.path.join(DOWNLOAD_TMP_DIR, name)):
+                    json_path = os.path.join(DOWNLOAD_TMP_DIR, name, "patchstorage.json")
+                    with open(json_path, 'w', encoding='utf-8') as file:
+                        json.dump(config, file, ensure_ascii=False, indent=4)
 
         os.remove(filename)
         install_bundles_in_tmp_dir(options, callback)
