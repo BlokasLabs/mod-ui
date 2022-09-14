@@ -319,8 +319,6 @@ JqueryClass('patchstorageBox', {
             plugin.category = ['MIDI',]
         }
 
-        console.log(plugin)
-
         self.patchstorageBox('synchronizePluginData', plugin)
         return plugin
 
