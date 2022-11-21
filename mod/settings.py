@@ -42,6 +42,7 @@ else:
     IMAGE_VERSION = None
 
 DATA_DIR = os.environ.get('MOD_DATA_DIR', os.path.expanduser('~/data'))
+PRESETS_DIR = os.environ.get('MOD_PRESETS_DIR', os.path.expanduser('~/.lv2'))
 CACHE_DIR = os.path.join(DATA_DIR, '.cache')
 USER_FILES_DIR = os.environ.get('MOD_USER_FILES_DIR', '/data/user-files')
 KEYS_PATH = os.environ.get('MOD_KEYS_PATH', join(DATA_DIR, 'keys'))

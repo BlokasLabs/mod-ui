@@ -137,7 +137,7 @@ from mod.protocol import (
 )
 from mod.settings import (
     APP, LOG, DEFAULT_PEDALBOARD,
-    DATA_DIR, LV2_PEDALBOARDS_DIR, LV2_FACTORY_PEDALBOARDS_DIR, USER_FILES_DIR,
+    DATA_DIR, PRESETS_DIR, LV2_PEDALBOARDS_DIR, LV2_FACTORY_PEDALBOARDS_DIR, USER_FILES_DIR,
     PEDALBOARD_INSTANCE, PEDALBOARD_INSTANCE_ID, PEDALBOARD_URI, PEDALBOARD_TMP_DIR,
     TUNER_URI, TUNER_INSTANCE_ID, TUNER_INPUT_PORT, TUNER_MONITOR_PORT, HMI_TIMEOUT, MODEL_TYPE,
     UNTITLED_PEDALBOARD_NAME, DEFAULT_SNAPSHOT_NAME,
@@ -2878,14 +2878,14 @@ class Host(object):
         pluginData   = self.plugins[instance_id]
         plugin_uri   = pluginData['uri']
         symbolname   = symbolify(name)[:32]
-        presetbundle = os.path.expanduser("~/.lv2/%s-%s.lv2") % (instance.replace("/graph/","",1), symbolname)
+        presetbundle = "%s/%s-%s.lv2" % (PRESETS_DIR, instance.replace("/graph/","",1), symbolname)
 
         if os.path.exists(presetbundle):
             # if presetbundle already exists, generate a new random bundle path
             while True:
-                presetbundle = os.path.expanduser("~/.lv2/%s-%s-%i.lv2" % (instance.replace("/graph/","",1),
+                presetbundle = "%s/%s-%s-%i.lv2" % (PRESETS_DIR, instance.replace("/graph/","",1),
                                                                            symbolname,
-                                                                           randint(1,99999)))
+                                                                           randint(1,99999))
                 if os.path.exists(presetbundle):
                     continue
                 break
