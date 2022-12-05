@@ -25,7 +25,10 @@ import sys
 import time
 import tarfile
 
-sys.modules['tornado'] = __import__('tornado4')
+try:
+    sys.modules['tornado'] = __import__('tornado4')
+except ModuleNotFoundError:
+    pass
 
 from base64 import b64decode, b64encode
 from datetime import timedelta
@@ -51,7 +54,7 @@ from mod.settings import (APP, LOG, DEV_API,
                           DEFAULT_PEDALBOARD, DEFAULT_SNAPSHOT_NAME, DATA_DIR, KEYS_PATH, USER_FILES_DIR,
                           FAVORITES_JSON_FILE, PREFERENCES_JSON_FILE, USER_ID_JSON_FILE,
                           DEV_HOST, UNTITLED_PEDALBOARD_NAME, MODEL_CPU, MODEL_TYPE, PEDALBOARDS_LABS_HTTP_ADDRESS,
-                          PATCHSTORAGE_ENABLED, PATCHSTORAGE_API_URL, PATCHSTORAGE_PLATFORM_ID, BLOKAS_ENABLED,
+                          PATCHSTORAGE_ENABLED, PATCHSTORAGE_API_URL, PATCHSTORAGE_PLATFORM_ID, PATCHSTORAGE_TARGET_ID, BLOKAS_ENABLED,
                           BLOKAS_APT_PACKAGE, BLOKAS_UPDATE_CHECK_URL)
 
 from mod import (
@@ -1891,6 +1894,7 @@ class TemplateHandler(TimelessRequestHandler):
             'patchstorage_enabled': 'true' if PATCHSTORAGE_ENABLED else 'false',
             'patchstorage_api_url': PATCHSTORAGE_API_URL,
             'patchstorage_platform_id': PATCHSTORAGE_PLATFORM_ID,
+            'patchstorage_target_id': PATCHSTORAGE_TARGET_ID,
             'blokas_enabled': 'true' if BLOKAS_ENABLED else 'false'
         }
         return context

@@ -256,7 +256,7 @@ JqueryClass('patchstorageBox', {
         // }
 
         plugin.uri = lplugin.uri || cplugin.uri
-        plugin.link = cplugin.link
+        plugin.link = cplugin.url
         plugin.label = lplugin.label || cplugin.label
         plugin.name = cplugin.name || lplugin.name 
         plugin.comment = cplugin.comment || lplugin.comment 
@@ -327,8 +327,9 @@ JqueryClass('patchstorageBox', {
     getCloudPlugins: function (query, store, callback) {
         var self = $(this)
         var base = PATCHSTORAGE_API_URL
-        var platform = PATCHSTORAGE_PLATFORM_ID
-        var url = `${base}?per_page=100&platforms=${platform}`
+        var platform_id = PATCHSTORAGE_PLATFORM_ID
+        var target_id = PATCHSTORAGE_TARGET_ID
+        var url = `${base}?per_page=100&platforms=${platform_id}&targets=${target_id}`
         var page = 1
 
         // ensure store cloud is ready
@@ -767,16 +768,31 @@ JqueryClass('patchstorageBox', {
     },
 
     installPlugin: function (plugin, callback) {
+        var file = null
+
+        if (plugin.files && Array.isArray(plugin.files)) {
+            plugin.files.forEach(function(f) {
+                if (f.target && f.target.id == PATCHSTORAGE_TARGET_ID) {
+                    file = f
+                }
+            });
+        }
+
+        if (file == null) {
+            alert('This plugin/bundle is not supported on your system.')
+            return
+        }
+        
         // long lived notification
         var notification = new Notification('warning')
-        var installationMsg = 'Downloading: ' + plugin.files[0].filename
+        var installationMsg = 'Downloading: ' + file.filename
         
         notification.open()
         notification.html(installationMsg)
         notification.type('warning')
         notification.bar(1)
 
-        var trans = new SimpleTransference(plugin.files[0].url, '/effect/install',
+        var trans = new SimpleTransference(file.url, '/effect/install',
         { to_args: { headers:
             { 'Patchstorage-Item' : plugin.psid, 'Patchstorage-Item-Version' : plugin.ps_cloud_version }
         }})

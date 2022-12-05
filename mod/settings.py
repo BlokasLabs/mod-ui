@@ -129,8 +129,9 @@ USING_256_FRAMES_FILE='/data/using-256-frames'
 
 # Blokas Flags
 PATCHSTORAGE_ENABLED=bool(int(os.environ.get('PATCHSTORAGE_ENABLED', True)))
-PATCHSTORAGE_API_URL=os.environ.get('PATCHSTORAGE_API_URL', 'https://patchstorage.com/api/beta/patches')
-PATCHSTORAGE_PLATFORM_ID=os.environ.get('PATCHSTORAGE_PLATFORM_ID', '8046')
+PATCHSTORAGE_API_URL=os.environ.get('PATCHSTORAGE_API_URL', 'http://localhost/api/beta/patches')
+PATCHSTORAGE_PLATFORM_ID=os.environ.get('PATCHSTORAGE_PLATFORM_ID', 5027)
+PATCHSTORAGE_TARGET_ID=os.environ.get('PATCHSTORAGE_TARGET_ID', 5037)
 BLOKAS_ENABLED=bool(int(os.environ.get('BLOKAS_ENABLED', True)))
 BLOKAS_APT_PACKAGE=os.environ.get('BLOKAS_APT_PACKAGE', 'modep-mod-ui')
 BLOKAS_UPDATE_CHECK_URL=os.environ.get('BLOKAS_UPDATE_CHECK_URL', 'https://blokas.io/modep/version/v1/')
