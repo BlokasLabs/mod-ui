@@ -12,7 +12,10 @@
         <div class="status-container">
             {{#download_count}}
             <span class="status downloads" title="Plugin Downloads">&#129095; {{download_count}}</span>
-            {{/download_count}}            
+            {{/download_count}}
+            {{#plugin_count}}
+            <span class="status downloads" title="Plugin Count">{{plugin_count}} Plugins</span>
+            {{/plugin_count}}
             {{#state}}
             <span class="status state {{state}}" title="Plugin State"></span>
             {{/state}}

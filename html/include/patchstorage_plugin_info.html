@@ -3,7 +3,7 @@
         <div class="row-fluid clearfix">
           <span class="js-close alignright btn btn-mini btn-danger">Close</span>
             <div class="span10 offset1 clearfix">
-                <figure class="screenshot">
+                <figure class="screenshot text-center">
                     {{#state}}
                     <div class="state {{state}}" title="{{state}}"></div>
                     {{/state}}
@@ -13,10 +13,7 @@
                 <div class="plugin-description">
                     <header>
                       <h1 class="text-uppercase">{{name}}</h1>
-                        {{#ps_local_version}}
-                        <a class="favorite-button {{favorite_class}}" title="Favorite Plugin"></a>
-                        {{/ps_local_version}}
-                        <br/>
+                        <p></p>
                         <p>
                             {{#category}}
                             <b>Category:</b> {{category}}<br/>
@@ -35,33 +32,33 @@
                         {{/author.name}}
                         {{#uploader}}
                         <p>
-                            <b>Uploaded by:</b> <span style="text-transform: uppercase;">{{uploader.name}}</span><br/>
+                            <b>Uploader:</b> <span style="text-transform: uppercase;">{{uploader}}</span><br/>
                             {{#link}}
                             <b>Link:</b> <a href="{{link}}" target="_blank">{{link}}</a><br/>
                             {{/link}}
                         </p>
                         {{/uploader}}
                         <p class="version">
-                            {{#plugin_version}}
+                            {{#local_version_string}}
                             <span>
-                                Plugin Build Version: <span class="bold">{{plugin_version}}</span><br/>
+                                Plugin Build Version: <span class="bold">{{local_version_string}}</span><br/>
                             </span>
-                            {{/plugin_version}}
+                            {{/local_version_string}}
+                            {{#cloud_revision}}
+                            <span class="js-latest-version">
+                                <span class="ps-label">P</span> Latest Revision: <span class="bold">{{cloud_revision}}</span><br/>
+                            </span>
+                            {{/cloud_revision}}
+                            {{#local_revision}}
+                            <span class="js-installed-version">
+                                <span class="ps-label">P</span> Installed Revision: <span class="bold">{{local_revision}}</span><br/>
+                            </span>
+                            {{/local_revision}}
                             {{#download_count}}
                             <span>
                                 <span class="ps-label">P</span> Downloads: <span class="bold">{{download_count}}</span><br/>
                             </span>
                             {{/download_count}}
-                            {{#ps_cloud_version}}
-                            <span class="js-latest-version">
-                                <span class="ps-label">P</span> Latest Revision: <span class="bold">{{ps_cloud_version}}</span><br/>
-                            </span>
-                            {{/ps_cloud_version}}
-                            {{#ps_local_version}}
-                            <span class="js-installed-version">
-                                <span class="ps-label">P</span> Installed Revision: <span class="bold">{{ps_local_version}}</span><br/>
-                            </span>
-                            {{/ps_local_version}}
                             <table><tr><td>
                             <button class="js-install btn btn-info btn-mini">Install</button>
                             <button class="js-upgrade btn btn-info btn-mini">Update</button>
@@ -76,11 +73,12 @@
                         <span>See it in action</span>
                     </a>
                     {{/pedalboard_href}}
-                    {{#link}}
-                    <a target="_blank" href="{{link}}" class="btn btn-info online-button-href">
+                    {{#url}}
+                    <a target="_blank" href="{{url}}" class="btn btn-info online-button-href">
                         <span>See on Patchstorage</span>
                     </a>
-                    {{/link}}
+                    <p></p>
+                    {{/url}}
                     {{#documentation_href}}
                     <a target="_blank" href="{{documentation_href}}" class="btn btn-info online-button-href">
                         <span>See documentation</span>

@@ -1,7 +1,7 @@
 {
   "name": "mod-boostrap",
   "author": "MOD Team",
-  "description": "grunt task for compiing MOD's css",
+  "description": "grunt task for compiling MOD's css",
   "repository": "moddevices/mod-ui",
   "dependencies": {
     "bootstrap": "~3.4.1",

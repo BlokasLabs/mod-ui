@@ -901,8 +901,8 @@ $('document').ready(function() {
     <div id="patchstorage-library" class="mod-hidden mod-init-hidden">
         <div>
             <header>
-                <h1 class="bottom top">PATCHSTORAGE (Alpha)</h1>
-                <button class="status icon mod-bypass" id="patchstorage_update_all">Update All</button>
+                <h1 class="bottom top">PATCHSTORAGE (Beta)</h1>
+                <button class="status icon mod-bypass" id="patchstorage_update_all">Refresh</button>
             </header>
 
             <div class="filter clearfix">
@@ -916,8 +916,15 @@ $('document').ready(function() {
                     <label for="patchstorage-installed">INSTALLED</label>
                 </div>
                 <div class="control-group">
-                    <input type="checkbox" name="not-available" id="patchstorage-not-available" />
-                    <label for="patchstorage-not-available">OTHER PLUGINS</label>
+                    <input type="checkbox" name="outdated" id="patchstorage-outdated"/>
+                    <label for="patchstorage-outdated">OUTDATED</label>
+                </div>
+                <div class="control-group">
+                    <input type="checkbox" name="other" id="patchstorage-other" />
+                    <label for="patchstorage-other">LOCAL PLUGINS</label>
+                </div>
+                <div class="">
+                    <input class="form-control" placeholder="Filter by keyword" type="search" autocomplete="off" />
                 </div>
                 <ul class="categories list list-unstyled" style="margin-bottom: 0px;">
                     <li id="patchstorage-tab-All">All</li>
@@ -937,9 +944,6 @@ $('document').ready(function() {
                     <!-- <li id="patchstorage-tab-MaxGen">Max&nbsp;gen~</li> -->
                     <!-- <li id="patchstorage-tab-Camomile">Camomile</li> -->
                 </ul>
-                <div class="form-group mod-hidden">
-                    <input class="form-control" placeholder="Filter by keyword(s)" type="search" autocomplete="off" />
-                </div>
             </div>
 
             <div class="patchstorage-plugins clearfix js-patchstorage">
