@@ -1008,7 +1008,6 @@ JqueryClass('patchstorageBox', {
             }
             
             plugin = self.patchstorageBox('mergePluginsData', localPlugin, cloudPlugin)
-            console.log(plugin)
 
             // cleanup
             self.data('info', null)
