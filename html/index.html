@@ -201,33 +201,34 @@ $('document').ready(function() {
     }
 
     if ({{blokas_enabled}}) {
-        $('#mod-devices').hide()
-        $('#mod-online-pedalboards').hide()
-        $('#mod-cloud-plugins').hide()
-        $('#mod-settings').hide()
-        $('#mod-status').hide()
-        $('#mod-update').hide()
-        $('#blokas-update').show()
-        $('#blokas-update').statusTooltip()
-        $('#blokas-update').statusTooltip('message', 'Check for Updates', true)
-        $('#blokas-update').click(function () {
+
+        function do_blokas_update(silent = false) {
             $.ajax({
                 type: 'GET',
                 url: '/apt/check',
                 success: function (resp) {
                     if (!resp.current) {
-                        alert('Oops, something went wrong! 😔')
-                        return
+                        if (!silent) { alert('Oops, something went wrong! 😔') }
+                        return false
                     }
                     
                     if (!resp.latest) {
-                        alert('Failed to get the latest available version! 😔\nMake sure your device is connected to the internet. 🌐')
-                        return
+                        if (!silent) { alert('Failed to get the latest available version! 😔\nMake sure your device is connected to the internet. 🌐') }
+                        return false
                     }
 
                     if (resp.latest == resp.current) {
-                        alert(`Congrats! You have the latest version: ${resp.latest} 👍`)
-                        return
+                        if (!silent) { alert(`Congrats! You have the latest version: ${resp.latest} 👍`) }
+                        return false
+                    }
+
+                    if (silent) {
+                        $('#blokas-update').statusTooltip('message', 'Update Available', true)
+                        $('#blokas-update').mouseover();
+                        setTimeout(function () {
+                            $('#blokas-update').mouseleave();
+                        }, 10000)
+                        return true
                     }
 
                     if (!confirm(`New version is available! 🤯 \nLatest version: ${resp.latest} \nCurrent version: ${resp.current} \nUpdate can take up to 10 minutes. \nContinue? 👌`))
@@ -263,8 +264,21 @@ $('document').ready(function() {
                 cache: false,
                 dataType: 'json'
             })
-        })
+        }
 
+        $('#mod-devices').hide()
+        $('#mod-online-pedalboards').hide()
+        $('#mod-cloud-plugins').hide()
+        $('#mod-settings').hide()
+        $('#mod-status').hide()
+        $('#mod-update').hide()
+        $('#blokas-update').show()
+        $('#blokas-update').statusTooltip()
+        $('#blokas-update').statusTooltip('message', 'Check for Updates', true)
+        $('#blokas-update').click(function () {
+            do_blokas_update()
+        })
+        do_blokas_update(true)
 
         // disable all calls to domain moddevices.com
         $(document).ajaxSend(function (event, xhr, options) {

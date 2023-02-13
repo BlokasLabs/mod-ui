@@ -224,15 +224,12 @@ JqueryClass('patchstorageBox', {
         delete p.content
         delete p.categories
         delete p.code
-        delete p.comment_count
         delete p.created_at
         delete p.custom_license_text
-        delete p.like_count
         delete p.preview_url
         delete p.self
         delete p.title
         delete p.updated_at
-        delete p.source_code_url
         delete p.slug
         delete p.platform
         delete p.excerpt
@@ -282,6 +279,10 @@ JqueryClass('patchstorageBox', {
         lPlugin.url = cPlugin.url
         lPlugin.uploader = cPlugin.uploader
         lPlugin.tags = cPlugin.tags
+        lPlugin.donate_url = cPlugin.donate_url
+        lPlugin.source_code_url = cPlugin.source_code_url
+        lPlugin.comment_count = cPlugin.comment_count
+        lPlugin.like_count = cPlugin.like_count
         
         if (lPlugin.local_revision && lPlugin.cloud_revision && lPlugin.cloud_revision != lPlugin.local_revision) {
             lPlugin.status = 'outdated'
@@ -983,7 +984,11 @@ JqueryClass('patchstorageBox', {
             cloud_revision: data.cloud_revision,
             local_version_string: (data.local_version) ? version(data.local_version) : null,
             package_name: package_name,
-            uploader: data.uploader
+            uploader: data.uploader,
+            donate_url: data.donate_url,
+            source_code_url: data.source_code_url,
+            like_count: data.like_count,
+            comment_count: data.comment_count
         }
 
         return $.extend(true, basic, extensive)
@@ -1003,6 +1008,7 @@ JqueryClass('patchstorageBox', {
             }
             
             plugin = self.patchstorageBox('mergePluginsData', localPlugin, cloudPlugin)
+            console.log(plugin)
 
             // cleanup
             self.data('info', null)

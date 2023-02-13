@@ -21,17 +21,13 @@
                             {{#tags}}
                             <b>Tags:</b> {{tags}}<br/>
                             {{/tags}}
-                        </p>
-                        {{#author.name}}
-                        <p>
+                            {{#author.name}}
                             <b>Author:</b> {{author.name}}<br/>
                             {{#author.homepage}}
                             <b>Homepage:</b> <a href="{{author.homepage}}" target="_blank">{{author.homepage}}</a><br/>
                             {{/author.homepage}}
-                        </p>
-                        {{/author.name}}
-                        {{#uploader}}
-                        <p>
+                            {{/author.name}}
+                            {{#uploader}}
                             <b>Uploader:</b> <span style="text-transform: uppercase;">{{uploader}}</span><br/>
                             {{#link}}
                             <b>Link:</b> <a href="{{link}}" target="_blank">{{link}}</a><br/>
@@ -67,18 +63,29 @@
                             </tr></table>
                         </p>
                     </header>
+                    <p></p>
                     <p>{{comment}}</p>
                     {{#pedalboard_href}}
-                    <a target="_blank" href="{{pedalboard_href}}" class="btn btn-info online-button-href">
+                    <a target="_blank" href="{{pedalboard_href}}" class="btn btn-info">
                         <span>See it in action</span>
                     </a>
                     {{/pedalboard_href}}
                     {{#url}}
-                    <a target="_blank" href="{{url}}" class="btn btn-info online-button-href">
-                        <span>See on Patchstorage</span>
+                    <a target="_blank" href="{{url}}" class="btn btn-info">
+                        <span>Comments</span>
                     </a>
-                    <p></p>
                     {{/url}}
+                    {{#donate_url}}
+                    <a target="_blank" href="{{donate_url}}" class="btn btn-info">
+                        <span>Donate to Author</span>
+                    </a>
+                    {{/donate_url}}
+                    {{#source_code_url}}
+                    <a target="_blank" href="{{source_code_url}}" class="btn btn-info">
+                        <span>Source Code</span>
+                    </a>
+                    {{/source_code_url}}
+                    <p></p>
                     {{#documentation_href}}
                     <a target="_blank" href="{{documentation_href}}" class="btn btn-info online-button-href">
                         <span>See documentation</span>
