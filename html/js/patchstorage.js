@@ -331,9 +331,9 @@ JqueryClass('patchstorageBox', {
                     var pages = xhr.getResponseHeader('x-wp-totalpages')
                     var transformed = self.patchstorageBox('transformCloudPlugins', data)
                     
-                    for (const [uri, plugin] of Object.entries(transformed)) {
+                    for (const plugin of transformed) { 
                         if (plugin.supported) {
-                            plugins_map[uri] = plugin
+                            plugins_map[plugin.uri] = plugin
                         }
                     }
 
