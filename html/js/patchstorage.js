@@ -273,6 +273,7 @@ JqueryClass('patchstorageBox', {
         }
 
         lPlugin.psid = cPlugin.psid
+        lPlugin.files = cPlugin.files
         lPlugin.cloud_revision = cPlugin.cloud_revision
         lPlugin.download_count = cPlugin.download_count
         lPlugin.state = cPlugin.state
