@@ -1726,7 +1726,6 @@ Desktop.prototype.makePatchstorageBox = function (el, trigger) {
     return el.patchstorageBox({
         trigger: trigger,
         windowManager: this.windowManager,
-        list: self.cloudPluginListFunction,
         removePluginBundles: function (bundles, callback) {
             if (!confirm('You are about to remove this plugin and any other in the same bundle. This may break pedalboards that depend on them.'))
                 return

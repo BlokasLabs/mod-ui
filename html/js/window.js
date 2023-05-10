@@ -36,12 +36,10 @@ function WindowManager() {
         for (var i = 0; i < self.windows.length; i++) {
             var win = self.windows[i]
             // Close window if not current and forced or not main and current window is not plugin info modal opened from cloud-plugins-library tab
-            if (win != window && (forced || ! win.data('isMainWindow')) && !(win.selector === '#cloud-plugins-library' && window && window.hasClass('plugin-info'))) {
-                win.window('close')
-            }
-            // HACK
-            // Close window if not current and forced or not main and current window is not plugin info modal opened from cloud-plugins-library tab
-            if (win != window && (forced || ! win.data('isMainWindow')) && !(win.selector === '#patchstorage-library' && window && window.hasClass('plugin-info'))) {
+            if (win != window && (forced || !win.data('isMainWindow')) &&
+                !(win.selector === '#cloud-plugins-library' && window && window.hasClass('plugin-info')) &&
+                !(win.selector === '#patchstorage-library' && window && window.hasClass('patchstorage-info'))
+            ) {
                 win.window('close')
             }
         }

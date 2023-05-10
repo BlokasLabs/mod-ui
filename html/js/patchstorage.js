@@ -1010,11 +1010,12 @@ JqueryClass('patchstorageBox', {
             
             plugin = self.patchstorageBox('mergePluginsData', localPlugin, cloudPlugin)
 
-            // cleanup
-            self.data('info', null)
-
             var metadata = self.patchstorageBox('getPluginCardData', plugin, true)
             var info = self.data('info')
+            if (info) {
+                info.remove()
+                self.data('info', null)
+            }
             
             info = $(Mustache.render(TEMPLATES.patchstorage_plugin_info, metadata))
 
