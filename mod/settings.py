@@ -17,6 +17,7 @@
 
 import os, sys
 from os.path import join
+from platform import machine
 
 DEV_ENVIRONMENT = bool(int(os.environ.get('MOD_DEV_ENVIRONMENT', False)))
 DEV_HMI = bool(int(os.environ.get('MOD_DEV_HMI', DEV_ENVIRONMENT)))
@@ -131,7 +132,18 @@ USING_256_FRAMES_FILE='/data/using-256-frames'
 PATCHSTORAGE_ENABLED=bool(int(os.environ.get('PATCHSTORAGE_ENABLED', True)))
 PATCHSTORAGE_API_URL=os.environ.get('PATCHSTORAGE_API_URL', 'http://localhost/api/beta/patches')
 PATCHSTORAGE_PLATFORM_ID=os.environ.get('PATCHSTORAGE_PLATFORM_ID', 5027)
-PATCHSTORAGE_TARGET_ID=os.environ.get('PATCHSTORAGE_TARGET_ID', 5037)
+
+PATCHSTORAGE_TARGET_ID=os.environ.get('PATCHSTORAGE_TARGET_ID', None)
+
+if PATCHSTORAGE_TARGET_ID == None:
+    if machine() in [ 'armv7l', 'aarch64' ]:
+        if sys.maxsize <= 2**32:
+            PATCHSTORAGE_TARGET_ID=os.environ.get('PATCHSTORAGE_ARMHF_TARGET_ID', None)
+        else:
+            PATCHSTORAGE_TARGET_ID=os.environ.get('PATCHSTORAGE_AARCH64_TARGET_ID', None)
+else:
+    PATCHSTORAGE_TARGET_ID=5037
+
 BLOKAS_ENABLED=bool(int(os.environ.get('BLOKAS_ENABLED', True)))
 BLOKAS_APT_PACKAGE=os.environ.get('BLOKAS_APT_PACKAGE', 'modep-mod-ui')
 BLOKAS_UPDATE_CHECK_URL=os.environ.get('BLOKAS_UPDATE_CHECK_URL', 'https://blokas.io/modep/version/v1/')
