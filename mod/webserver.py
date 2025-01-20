@@ -1741,6 +1741,12 @@ class SnapshotLoad(JsonRequestHandler):
         ok = yield gen.Task(SESSION.host.snapshot_load_gen_helper, idx, False, abort_catcher)
         self.write(ok)
 
+class SnapshotCurrent(JsonRequestHandler):
+    @web.asynchronous
+    @gen.engine
+    def get(self):
+        self.write(SESSION.host.snapshot_name())
+
 class DashboardClean(JsonRequestHandler):
     @web.asynchronous
     @gen.engine
@@ -2417,6 +2423,7 @@ application = web.Application(
             (r"/snapshot/list", SnapshotList),
             (r"/snapshot/name", SnapshotName),
             (r"/snapshot/load", SnapshotLoad),
+            (r"/snapshot/current", SnapshotCurrent),
 
             # bank stuff
             (r"/banks/?", BankLoad),
